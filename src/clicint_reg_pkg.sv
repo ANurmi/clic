@@ -22,6 +22,9 @@ package clicint_reg_pkg;
     } ie;
     struct packed {
       logic        q;
+    } pcs;
+    struct packed {
+      logic        q;
     } attr_shv;
     struct packed {
       logic [1:0]  q;
