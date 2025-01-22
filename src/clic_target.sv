@@ -40,6 +40,7 @@ module clic_target #(
   input                        rst_ni,
 
   input [N_SOURCE-1:0]         ip_i,
+  input [N_SOURCE-1:0]         pcs_i,
   input [N_SOURCE-1:0]         ie_i,
   input [N_SOURCE-1:0]         le_i,
 
@@ -55,7 +56,8 @@ module clic_target #(
   output logic [ModeWidth-1:0] irq_mode_o,
 
   output logic                 irq_kill_req_o,
-  input logic                  irq_kill_ack_i
+  input logic                  irq_kill_ack_i,
+  output logic                 irq_is_pcs_o
 );
 
   // this only works with 2 or more sources
@@ -240,6 +242,8 @@ module clic_target #(
 
   assign irq_valid_o = irq_valid_q;
   assign irq_id_o    = irq_id_q;
+
+  assign irq_is_pcs_o = pcs_i[irq_id_q];
 
   assign irq_max_o = irq_max_q;
   assign irq_mode_o = irq_mode_q;

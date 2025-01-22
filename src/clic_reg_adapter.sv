@@ -32,6 +32,7 @@ module clic_reg_adapter import mclic_reg_pkg::*; import clicint_reg_pkg::*; #(
   output logic [N_SOURCE-1:0] ip_sw_o,
   output logic [N_SOURCE-1:0] ie_o,
   output logic [N_SOURCE-1:0] le_o,
+  output logic [N_SOURCE-1:0] pcs_o,
 
   input logic [N_SOURCE-1:0]  ip_i
 );
@@ -45,6 +46,7 @@ module clic_reg_adapter import mclic_reg_pkg::*; import clicint_reg_pkg::*; #(
     assign shv_o[i] = clicint_reg2hw[i].clicint.attr_shv.q;
     assign ip_sw_o[i] = clicint_reg2hw[i].clicint.ip.q;
     assign ie_o[i] = clicint_reg2hw[i].clicint.ie.q;
+    assign pcs_o[i] = clicint_reg2hw[i].clicint.pcs.q;
     assign clicint_hw2reg[i].clicint.ip.de = 1'b1; // Always write
     assign clicint_hw2reg[i].clicint.ip.d  = ip_i[i];
     assign le_o[i] = clicint_reg2hw[i].clicint.attr_trig.q[0];

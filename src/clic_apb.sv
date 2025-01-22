@@ -50,6 +50,7 @@ module clic_apb #(
   output [7:0]                          irq_level_o,
   output logic                          irq_shv_o,
   output logic [1:0]                    irq_priv_o,
+  output logic                          irq_is_pcs_o,
   output logic                          irq_kill_req_o,
   input logic                           irq_kill_ack_i
 
@@ -116,7 +117,8 @@ module clic_apb #(
     .irq_shv_o,
     .irq_priv_o,
     .irq_kill_req_o,
-    .irq_kill_ack_i
+    .irq_kill_ack_i,
+    .irq_is_pcs_o
   );
 
 endmodule // clic_apb

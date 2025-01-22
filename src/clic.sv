@@ -45,7 +45,8 @@ module clic import mclic_reg_pkg::*; import clicint_reg_pkg::*; #(
   output logic             irq_shv_o,
   output logic [1:0]       irq_priv_o,
   output logic             irq_kill_req_o,
-  input  logic             irq_kill_ack_i
+  input  logic             irq_kill_ack_i,
+  output logic             irq_is_pcs_o
 );
 
   if (USCLIC)
@@ -76,6 +77,7 @@ module clic import mclic_reg_pkg::*; import clicint_reg_pkg::*; #(
 
   logic [N_SOURCE-1:0] le; // 0: level-sensitive 1: edge-sensitive
   logic [N_SOURCE-1:0] ip;
+  logic [N_SOURCE-1:0] pcs;
   logic [N_SOURCE-1:0] ie;
   logic [N_SOURCE-1:0] ip_sw; // sw-based edge-triggered interrupt
   logic [N_SOURCE-1:0] shv; // Handle per-irq SHV bits
@@ -108,6 +110,7 @@ module clic import mclic_reg_pkg::*; import clicint_reg_pkg::*; #(
     .rst_ni,
 
     .ip_i        (ip),
+    .pcs_i       (pcs),
     .ie_i        (ie),
     .le_i        (le),
 
@@ -119,6 +122,7 @@ module clic import mclic_reg_pkg::*; import clicint_reg_pkg::*; #(
     .irq_valid_o,
     .irq_ready_i,
     .irq_id_o,
+    .irq_is_pcs_o,
     .irq_max_o   (irq_max),
     .irq_mode_o  (irq_mode),
 
@@ -260,6 +264,7 @@ module clic import mclic_reg_pkg::*; import clicint_reg_pkg::*; #(
     .ip_sw_o   (ip_sw),
     .ie_o      (ie),
     .le_o      (le),
+    .pcs_o     (pcs),
 
     .ip_i      (ip)
   );
